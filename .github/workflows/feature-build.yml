@@ -14,15 +14,15 @@ jobs:
         environment:
           [
             {
-              godot_template: "Windows Desktop x86",
-              output_dir: windows_x86,
+              godot_template: "Windows Desktop 32",
+              output_dir: windows_x86_32,
               file_suffix: "exe",
               os: windows,
               architecture: x86,
             },
             {
-              godot_template: "Linux x86",
-              output_dir: linux_x86,
+              godot_template: "Linux 32",
+              output_dir: linux_x86_32,
               file_suffix: "x86_64",
               os: linux,
               architecture: x86,
