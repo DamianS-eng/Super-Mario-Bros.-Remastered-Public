@@ -27,13 +27,6 @@ jobs:
               os: linux,
               architecture: x86,
             },
-            {
-              godot_template: "Linux arm64",
-              output_dir: linux_arm64,
-              file_suffix: "arm64",
-              os: linux,
-              architecture: arm64,
-            },
           ]
     runs-on: ubuntu-22.04
     container:
@@ -82,23 +75,17 @@ jobs:
           draft: false  # Set draft to false to publish the release immediately
           prerelease: true
 
-      - name: Download Windows Artifact
+      - name: Download Windows_32 Artifact
         uses: actions/download-artifact@v4
         with:
-          name: windows_x86
-          path: build/windows_x86/
+          name: windows_x86_32
+          path: build/windows_x86_32/
 
-      - name: Download Linux x86 Artifact
+      - name: Download Linux x86_32 Artifact
         uses: actions/download-artifact@v4
         with:
-          name: linux_x86
-          path: build/linux_x86/
-
-      - name: Download Linux arm64 Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: linux_arm64
-          path: build/linux_arm64/
+          name: linux_x86_32
+          path: build/linux_x86_32/
 
       - name: Upload Windows Release Asset
         uses: actions/upload-release-asset@v1
@@ -106,8 +93,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/windows_x86/${{env.EXPORT_NAME}}.zip
-          asset_name: ${{env.EXPORT_NAME}}_windows_x86.zip
+          asset_path: build/windows_x86_32/${{env.EXPORT_NAME}}.zip
+          asset_name: ${{env.EXPORT_NAME}}_windows_x86_32.zip
           asset_content_type: application/zip
 
       - name: Upload Linux x86 Release Asset
@@ -116,16 +103,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux_x86/${{env.EXPORT_NAME}}.zip
-          asset_name: ${{env.EXPORT_NAME}}_linux_x86.zip
-          asset_content_type: application/zip
-
-      - name: Upload Linux arm64 Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: build/linux_arm64/${{env.EXPORT_NAME}}.zip
-          asset_name: ${{env.EXPORT_NAME}}_linux_arm64.zip
+          asset_path: build/linux_x86_32/${{env.EXPORT_NAME}}.zip
+          asset_name: ${{env.EXPORT_NAME}}_linux_x86_32.zip
           asset_content_type: application/zip
